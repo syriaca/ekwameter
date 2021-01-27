@@ -9,7 +9,7 @@ const StyledSelectContainer = styled.div`
     background-color: transparent;
     border: 2px solid ${(props) => props.theme.colors.grays.light};
     border-radius: ${(props) => props.theme.borderRadius.md};
-    margin-bottom: 1rem;
+    margin-bottom: ${(props) => props.theme.spacing['4']};
     outline: 0;
     position: relative;
     text-align: left;
@@ -18,15 +18,14 @@ const StyledSelectContainer = styled.div`
     @media (min-width: ${(props) => props.theme.screens.md}) {
         max-width: 200px;
     }
-
 `;
 
 const StyledSelect = styled.select`
     appearance: none;
     border: 0;
     outline: 0;
-    padding: .5rem;
-    border-radius: .5rem;
+    padding: ${(props) => props.theme.spacing['2']};
+    border-radius: ${(props) => props.theme.borderRadius.md};
     width: 100%;
 
      @media (min-width: ${(props) => props.theme.screens.md}) {
@@ -68,7 +67,7 @@ const Select = () => {
                             </option>
                         )
                     })}
-            </StyledSelect>
+                </StyledSelect>
             </StyledSelectContainer>
         </>    
     );

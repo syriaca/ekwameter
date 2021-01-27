@@ -14,26 +14,26 @@ export const MeterProvider = ({ children }: MeterProvider) => {
 
   const { data, isLoading, isError } = useFetch(`https://5e9ed3cdfb467500166c47bb.mockapi.io/api/v1/meter/${activeMeter.id}/${activeMeter.type}`);
 
-  // Linked to the year selection input, Launch data fetching according
-  // the option value
+  // Linked to the year selection input, Launch data fetching according the option value
   const handleYearFiltering = (filter: string) => { setActiveFilter(filter) };
   
-  // Function linked to the toggle buttons to switch between 
-  // meters  
+  // Function linked to the toggle buttons to switch between meters  
   const toggleMeterType = () => {
     setActiveMeterType(activeMeter.type === "electricity" ? {id: "1", type: "gas"} : {id: "2", type: "electricity"});
   };
-
-  // If the filter argument exist, we filter the array with date and then we display it on screen
-  const filterByDate = (arr: any[]) => {
-    activeFilter === "all" ? setMetersData(arr) : setMetersData(arr.filter((year: (any)) => year.createdAt.includes(activeFilter)));
-  }
  
   useEffect(() => {
+    
     const { formatedDateArray, yearsArray } = formatedDate(data);
+    
+    const filterByDate = (arr: any[]) => {
+      activeFilter === "all" ? setMetersData(arr) : setMetersData(arr.filter((year: (any)) => year.createdAt.includes(activeFilter)));
+    }
+
     filterByDate(formatedDateArray);
     setMetersYear(yearsArray);
-  }, [isLoading, activeFilter])
+
+  }, [data, isLoading, activeFilter])
    
   return (
     <MeterContext.Provider value={{
